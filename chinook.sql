@@ -42,12 +42,20 @@ SELECT SUM (TOTAL) FROM INVOICE WHERE InvoiceDate BETWEEN '2011-01-01' AND '2011
 SELECT COUNT(InvoiceId) FROM InvoiceLine WHERE InvoiceId = 37;
 
 -- 11. line_items_per_invoice.sql: Looking at the InvoiceLine table, provide a query that COUNTs the number of line items for each Invoice. HINT: GROUP BY
+SELECT COUNT (InvoiceLineId) FROM INVOICELINE
+GROUP BY InvoiceId
 
 -- 12. line_item_track.sql: Provide a query that includes the purchased track name with each invoice line item.
+SELECT TRACK.Name, INVOICELINE.InvoiceLineId FROM TRACK, INVOICELINE
+WHERE TRACK.TrackId = INVOICELINE.TrackId
 
 -- 13. line_item_track_artist.sql: Provide a query that includes the purchased track name AND artist name with each invoice line item.
+SELECT TRACK.Name, TRACK.Composer, INVOICELINE.InvoiceLineId FROM TRACK, InvoiceLine
+WHERE TRACK.TrackId = INVOICELINE.TrackId
 
 -- 14. country_invoices.sql: Provide a query that shows the # of invoices per country. HINT: GROUP BY
+SELECT BillingCountry, COUNT( InvoiceId) FROM INVOICE
+GROUP BY BillingCountry
 
 -- 15. playlists_track_count.sql: Provide a query that shows the total number of tracks in each playlist. The Playlist name should be include on the resulant table.
 
