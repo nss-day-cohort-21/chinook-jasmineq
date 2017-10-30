@@ -16,9 +16,14 @@ SELECT DISTINCT BillingCountry FROM INVOICE
 ORDER BY INVOICE.BillingCountry ASC
 
 -- 6. sales_agent_invoices.sql: Provide a query that shows the invoices associated with each sales agent. The resultant table should include the Sales Agent's full name.
+SELECT cust.SupportRepId, emp.FirstName, emp.LastName, inv.InvoiceId
+FROM CUSTOMER AS cust LEFT JOIN EMPLOYEE AS emp ON cust.SupportRepId = emp.EmployeeId
+LEFT JOIN INVOICE AS inv ON cust.CustomerId = inv.CustomerId;
 
 -- 7. invoice_totals.sql: Provide a query that shows the Invoice Total, Customer name, Country and Sale Agent name for all invoices and customers.
-SELECT SUM (TOTAL) FROM INVOICE
+SELECT cust.FirstName, cust.LastName, cust.Country, emp.FirstName, emp.LastName, inv.Total
+FROM CUSTOMER AS cust LEFT JOIN EMPLOYEE AS emp ON cust.SupportRepId = emp.EmployeeId
+LEFT JOIN INVOICE AS inv ON cust.CustomerId = inv.CustomerId;
 
 -- 8. total_invoices_{year}.sql: How many Invoices were there in 2009 and 2011?
 -- Total number of Invoices in 2009
